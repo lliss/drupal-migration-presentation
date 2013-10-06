@@ -85,8 +85,85 @@
 					<p>Never estimate a data migration without first seeing the source data.</p>
 					<p>Migrations are complex work, highly variable, and problem prone.</p>
 				</section>
+				
+				<section>
+					<h2>Common Techniques</h2>
+					<ul>
+					  <li>Feeds Module</li>
+            <li>Import Script</li>
+            <li>Migrate Module</li>
+            <li>Services/Services Module</li>
+            <li>Direct SQL inserts</li>
+            <li>Cut and paste (don't rule it out!)</li>
+					</ul>
+				</section>
 
+				<section>
+					<h2>Feeds Module</h2>
+          <p>Feeds Module provides a user interface and fairly easy to desipher settings for scraping data from RSS feed, CSV files, XML data, and serveral other formats.</p>
+					<ul>
+					  <li>No programming necessary</li>
+            <li>Config handled through admin screens</li>
+            <li>Provides custom mapping of fields</li>
+            <li>Has update and rollback functions</li>
+            <li>Limitations for more complex data</li>
+            <li>Data relationships are tricky/not supported</li>            
+					</ul>
+				</section>
 
+        <section>
+					<h2>Custom Import Scripts</h2>
+          <p>Take full control of the data and rely on your knowledge of Drupal and your coding chops to work legacy data into the new site.</p>
+					<ul>
+					  <li>Fast and efficient for straight forward data sets</li>
+            <li>Leaves full control of the process to the developer</li>
+            <li>Minimal code overhead - easier to debug</li>
+            <li>Provides nothing by default (rollbacks, updates, useful drush commands)</li>
+            <li>Must know Drupal's APIs (or learn them)</li>   
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Migrate Module</h2>
+          <p>The go-to tool for serious migrations that have complex relationships and Drupal content types that have complex fields.</p>
+					<ul>
+					  <li>Abstract system with connectors to many data sources</li>
+					  <li>CSV, XML, JSON, list data, HTML</li>
+					  <li>Database support includes Oracle, MSSQL</li>
+					  <li>Dependencies and Referened data</li>
+					  <li>Abstract support for Drupal systems (node, comment, file, taxonomy, user)</li>
+ 					  <li>Extendable for new sources and destinations</li>
+ 					  <li>Drush and interface tools (rollback, update, reset)</li>
+ 					  <li>Complex</li>
+ 					  <li>Debugging challenges</li>
+ 					  <li>Yet another API to learn/work with</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Direct Database Inserts</h2>
+          <p>Drupal's storage is a standard relational database. If you write data to the database directly, you bypass the Drupal bootstrap and complexity.</p>
+          <h4>* You probably don't want to do this</h4>
+          <p><small>Drupal has many moving parts. Modules often expect to be alterted (via the hook system) when certain events happen (node_save, node_insert, user_save, etc). Bypassing the API poses the greatest potential for problems.</small></p>
+					<ul>
+					  <li>Fastest (for the computer)</li>
+					  <li>Cleanup and manipulation of data in SQL is tricky</li>
+					  <li>Requires deep understanding of Drupal</li>
+					  <li>Can be a total disaster</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Manual / Cut and Paste</h2>
+          <p>Depending on the amount of data this may actually be the fastest (for a human) way to move data to Drupal.</p>
+					<ul>
+					  <li>Easiest for non-developers</li>
+					  <li>Totally familiar forms</li>
+					  <li>Clean up data as you go</li>
+					  <li>Tedious</li>
+					  <li>Potential for missed or incorrect data</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
