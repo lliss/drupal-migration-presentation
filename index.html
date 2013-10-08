@@ -228,6 +228,13 @@ class ExampleMigration extends Migration {
 					    <li class="fragment">Can be a total disaster</li>
 					  </ul>
 				  </section>
+          <section data-transition="linear">
+ 					  <h2>Direct Database Inserts</h2>
+            <pre><code>
+INSERT INTO users (uid, name, mail, status) 
+  SELECT MAX(uid) + 1, 'bob', 'bob@local', 1 FROM users;</code></pre>
+            <p class="fragment"><small>*The <em>users</em> table does not have an auto incrementing id.</small></p>
+				  </section>
         </section>				
 				<section>
           <section data-transition="linear">
