@@ -39,7 +39,7 @@
 					<h1>Intro to Data Migration</h1>
 					<h3>Migrating Data Into Drupal<h3>
 					<h4>Problems, Solutions, and Thoughts</h4>
-					<p><br>Presented by Laurence Liss (<a href="https://drupal.org/user/724750">lliss</a>)</p>
+					<p class="centered"><br>Presented by Laurence Liss (<a href="https://drupal.org/user/724750">lliss</a>)</p>
 				</section>
 
 				<section>
@@ -62,108 +62,188 @@
             <li>User data or accounts need to be available</li>
             <li>Files and images need to be ported.</li>
 					</ul>
-					<h4><br>The Goal</h4><p>a seamless transition between the old site and the new</p>
+					<div class="fragment"><h4><br>The Goal</h4><p class="centered">a seamless transition between the old site and the new</p></div>
 				</section>
 
 				<section>
 					<h2>Before You Begin</h2>
-					<p>Assess the situation.</p>
+					<h4>Assess the situation.</h4>
 					<ul>
-					  <li>How much data</li>
-            <li>Downtime tolerance</li>
-            <li>Data volitility</li>
-            <li>Data loss tolerance</li>
-            <li>Does the old data fit the new model</li>
-            <li>How well structured is the data</li>
-            <li>Is the data private/sensitive</li>
-            <li>Are there files, images, external resources</li>
-            <li>Do you have access to source code</li>
+					  <li class="fragment">How much data</li>
+            <li class="fragment">Downtime tolerance</li>
+            <li class="fragment">Data volitility</li>
+            <li class="fragment">Data loss tolerance</li>
+            <li class="fragment">Does the old data fit the new model</li>
+            <li class="fragment">How well structured is the data</li>
+            <li class="fragment">Is the data private/sensitive</li>
+            <li class="fragment">Are there files, images, external resources</li>
+            <li class="fragment">Do you have access to source code</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2>Estimates</h2>
-					<p>Never estimate a data migration without first seeing the source data.</p>
-					<p>Migrations are complex work, highly variable, and problem prone.</p>
+					<p class="fragment">Never estimate a data migration without first seeing the source data.</p>
+					<p class="fragment">Migrations are complex work, highly variable, and problem prone.</p>
 				</section>
 				
 				<section>
 					<h2>Common Techniques</h2>
 					<ul>
-					  <li>Feeds Module</li>
+					  <li><a href="https://drupal.org/project/feeds">Feeds Module</a></li>
             <li>Import Script</li>
-            <li>Migrate Module</li>
-            <li>Services/Services Module</li>
+            <li><a href="https://drupal.org/project/migrate">Migrate Module</a></li>
+            <li>Services/<a href="https://drupal.org/project/services">Services Module</a></li>
             <li>Direct SQL inserts</li>
             <li>Cut and paste (don't rule it out!)</li>
 					</ul>
 				</section>
-
-				<section>
-					<h2>Feeds Module</h2>
-          <p>Feeds Module provides a user interface and fairly easy to desipher settings for scraping data from RSS feed, CSV files, XML data, and serveral other formats.</p>
-					<ul>
-					  <li>No programming necessary</li>
-            <li>Config handled through admin screens</li>
-            <li>Provides custom mapping of fields</li>
-            <li>Has update and rollback functions</li>
-            <li>Limitations for more complex data</li>
-            <li>Data relationships are tricky/not supported</li>            
-					</ul>
-				</section>
-
+			  <section>
+					<section data-transition="linear">
+    				<h2>Feeds Module</h2>	  
+            <p>Feeds Module provides a user interface and fairly easy to desipher settings for scraping data from RSS feed, CSV files, XML data, and serveral other formats.</p>
+					</section>
+					<section data-transition="linear">
+					  <h2>Feeds Module</h2>
+					  <ul>
+					    <li class="fragment">No programming necessary</li>
+              <li class="fragment">Config handled through admin screens</li>
+              <li class="fragment">Provides custom mapping of fields</li>
+              <li class="fragment">Has update and rollback functions</li>
+              <li class="fragment">Limitations for more complex data</li>
+              <li class="fragment">Data relationships are tricky/not supported</li>            
+					  </ul>
+				  </section>
+        </section>
         <section>
-					<h2>Custom Import Scripts</h2>
-          <p>Take full control of the data and rely on your knowledge of Drupal and your coding chops to work legacy data into the new site.</p>
-					<ul>
-					  <li>Fast and efficient for straight forward data sets</li>
-            <li>Leaves full control of the process to the developer</li>
-            <li>Minimal code overhead - easier to debug</li>
-            <li>Provides nothing by default (rollbacks, updates, useful drush commands)</li>
-            <li>Must know Drupal's APIs (or learn them)</li>   
-					</ul>
+          <section data-transition="linear">
+					  <h2>Custom Import Scripts</h2>
+            <p>Take full control of the data and rely on your knowledge of Drupal and your coding chops to work legacy data into the new site.</p>
+          </section>  
+    			<section data-transition="linear">
+					  <h2>Custom Import Scripts</h2>
+					  <ul>
+					    <li class="fragment">Fast and efficient for straight forward data sets</li>
+              <li class="fragment">Leaves full control of the process to the developer</li>
+              <li class="fragment">Minimal code overhead - easier to debug</li>
+              <li class="fragment">Provides nothing by default <br />(rollbacks, updates, useful drush commands)</li>
+              <li class="fragment">Must know Drupal's APIs (or learn them)</li>   
+              <li class="fragment">As complexity grows Migrate Module looks better</li>   
+					  </ul>
+				  </section>
+				  <section data-transition="linear">
+					  <h2>Custom Import Scripts</h2>
+					  <pre>
+					  <code>
+$node = new stdClass();
+$node->title = 'Hello';
+$node->body[LANGUAGE_NONE][0]['value'] = 'Hello World!';
+$node->type = 'page';
+node_save($node);
+					  </code>
+					  </pre>
+				  </section>
+				  <section data-transition="linear">
+					  <h2>Custom Import Scripts</h2>
+					  <pre>
+					  <code>
+$user = new stdClass();
+$user->name = 'Walter';
+$user->status = 1;
+$password = 'secret';
+require_once(DRUPAL_ROOT . '/includes/password.inc');
+$user->pass = user_hash_password($password);
+$user->mail = 'walter.whitman@example.com';
+user_save($user);
+					  </code>
+					  </pre>
+				  </section>
 				</section>
-				
 				<section>
-					<h2>Migrate Module</h2>
-          <p>The go-to tool for serious migrations that have complex relationships and Drupal content types that have complex fields.</p>
-					<ul>
-					  <li>Abstract system with connectors to many data sources</li>
-					  <li>CSV, XML, JSON, list data, HTML</li>
-					  <li>Database support includes Oracle, MSSQL</li>
-					  <li>Dependencies and Referened data</li>
-					  <li>Abstract support for Drupal systems (node, comment, file, taxonomy, user)</li>
- 					  <li>Extendable for new sources and destinations</li>
- 					  <li>Drush and interface tools (rollback, update, reset)</li>
- 					  <li>Complex</li>
- 					  <li>Debugging challenges</li>
- 					  <li>Yet another API to learn/work with</li>
-					</ul>
+				  <section data-transition="linear">
+					  <h2>Migrate Module</h2>
+            <p>The go-to tool for serious migrations that have complex relationships and Drupal content types that have complex fields.</p>
+					</section>
+				  <section data-transition="linear">
+				    <h2>Migrate Module</h2>
+				    <ul>
+				      <li class="fragment">Abstract system with connectors to many data sources</li>
+				      <li class="fragment">CSV, XML, JSON, list data, HTML</li>
+				      <li class="fragment">Database support includes Oracle, MSSQL</li>
+				      <li class="fragment">Dependencies and Referened data</li>
+				      <li class="fragment">Abstract support for Drupal systems <br />(node, comment, file, taxonomy, user)</li>
+				      <li class="fragment">Extendable for new sources and destinations</li>
+				      <li class="fragment">Drush and interface tools (rollback, update, reset)</li>
+				      <li class="fragment">Complex</li>
+				      <li class="fragment">Debugging challenges</li>
+				      <li class="fragment">Yet another API to learn/work with</li>
+				    </ul>
+			    </section>
+			    <section data-transition="linear">
+				    <h2>Migrate Module</h2>
+				    <pre><code>
+class ExampleMigration extends Migration {
+  public function __construct($arguments) {
+    parent::__construct($arguments);
+    $query = Database::getConnection('default', 'legacy')
+             ->select('example_pages', 'p')
+             ->fields('p', array('pgid', 'page_title', 'page_body'));
+    $this->source = new MigrateSourceSQL($query);
+    $this->destination = new MigrateDestinationNode('page');
+
+    $this->map = new MigrateSQLMap($this->machineName,
+        array(
+          'pgid' => array('type' => 'int',
+                          'unsigned' => TRUE,
+                          'not null' => TRUE,
+                         )
+        ),
+        MigrateDestinationNode::getKeySchema()
+      );
+
+    $this->addFieldMapping('title', 'page_title');
+    $this->addFieldMapping('body', 'page_body');
+  }
+}
+</code>
+</pre>
+          </section>
 				</section>
-				
 				<section>
-					<h2>Direct Database Inserts</h2>
-          <p>Drupal's storage is a standard relational database. If you write data to the database directly, you bypass the Drupal bootstrap and complexity.</p>
-          <h4>* You probably don't want to do this</h4>
-          <p><small>Drupal has many moving parts. Modules often expect to be alterted (via the hook system) when certain events happen (node_save, node_insert, user_save, etc). Bypassing the API poses the greatest potential for problems.</small></p>
-					<ul>
-					  <li>Fastest (for the computer)</li>
-					  <li>Cleanup and manipulation of data in SQL is tricky</li>
-					  <li>Requires deep understanding of Drupal</li>
-					  <li>Can be a total disaster</li>
-					</ul>
-				</section>
-				
+				  <section data-transition="linear">
+					  <h2>Direct Database Inserts</h2>
+            <p>Drupal's storage is a standard relational database. If you write data to the database directly, you bypass the Drupal bootstrap and complexity.</p>
+          </section>
+          <section data-transition="linear">
+ 					  <h2>Direct Database Inserts</h2>
+            <h4>* You probably don't want to do this</h4>
+            <p class="fragment">Drupal has many moving parts. Modules often expect to be alterted (via the hook system) when certain events happen (node_save, node_insert, user_save, etc). Bypassing the API poses the greatest potential for problems.</p>
+          </section>
+          <section data-transition="linear">
+ 					  <h2>Direct Database Inserts</h2>
+					  <ul>
+					    <li class="fragment">Fastest (for the computer)</li>
+					    <li class="fragment">Cleanup and manipulation of data in SQL is tricky</li>
+					    <li class="fragment">Requires deep understanding of Drupal</li>
+					    <li class="fragment">Can be a total disaster</li>
+					  </ul>
+				  </section>
+        </section>				
 				<section>
-					<h2>Manual / Cut and Paste</h2>
-          <p>Depending on the amount of data this may actually be the fastest (for a human) way to move data to Drupal.</p>
-					<ul>
-					  <li>Easiest for non-developers</li>
-					  <li>Totally familiar forms</li>
-					  <li>Clean up data as you go</li>
-					  <li>Tedious</li>
-					  <li>Potential for missed or incorrect data</li>
-					</ul>
+          <section data-transition="linear">
+					  <h2>Manual / Cut and Paste</h2>
+            <p>Depending on the amount of data this may actually be the fastest (for a human) way to move data to Drupal.</p>
+          </section>
+          <section data-transition="linear">
+					  <h2>Manual / Cut and Paste</h2>
+					  <ul>
+					    <li>Easiest for non-developers</li>
+					    <li>Totally familiar forms</li>
+					    <li>Clean up data as you go</li>
+					    <li>Tedious</li>
+					    <li>Potential for missed or incorrect data</li>
+					  </ul>
+          </section>
 				</section>
 			</div>
 		</div>
