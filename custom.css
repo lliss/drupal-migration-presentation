@@ -1,0 +1,6 @@
+section .centered {
+  text-align: center;
+}
+
+section p {
+  text-align: left;
