@@ -37,6 +37,10 @@
 			<div class="slides">
 				<section>
 					<h1>Intro to Data Migration</h1>
+					<h3><br />Drupaldelphia 2013</h3>
+				</section>
+				<section>
+					<h1>Intro to Data Migration</h1>
 					<h3>Migrating Data Into Drupal<h3>
 					<h4>Problems, Solutions, and Thoughts</h4>
 					<p class="centered"><br>Presented by Laurence Liss (<a href="https://drupal.org/user/724750">lliss</a>)</p>
@@ -93,8 +97,8 @@
 					  <li><a href="https://drupal.org/project/feeds">Feeds Module</a></li>
             <li>Import Script</li>
             <li><a href="https://drupal.org/project/migrate">Migrate Module</a></li>
-            <li>Services/<a href="https://drupal.org/project/services">Services Module</a></li>
             <li>Direct SQL inserts</li>
+            <li>Services/<a href="https://drupal.org/project/services">Services Module</a></li>
             <li>Cut and paste (don't rule it out!)</li>
 					</ul>
 				</section>
@@ -127,10 +131,17 @@
               <li class="fragment">Leaves full control of the process to the developer</li>
               <li class="fragment">Minimal code overhead - easier to debug</li>
               <li class="fragment">Provides nothing by default <br />(rollbacks, updates, useful drush commands)</li>
+              <li class="fragment">Connect to any source* <br /><small>providing you can write the code</small></li>   
               <li class="fragment">Must know Drupal's APIs (or learn them)</li>   
               <li class="fragment">As complexity grows Migrate Module looks better</li>   
 					  </ul>
 				  </section>
+				  <section data-transition="linear">
+					  <h2>Custom Import Scripts</h2>
+            <ul>
+					    <p>Build the same data that Drupal's forms prepare and then run the save functions yourself. You're just building a module that has no interface.</p>
+					    <p>You'll probably use functions that you wouldn't use in a contributed module. So get friendly with Drupal's source code and core systems.</p>
+          </section>
 				  <section data-transition="linear">
 					  <h2>Custom Import Scripts</h2>
 					  <pre>
@@ -194,9 +205,9 @@ class ExampleMigration extends Migration {
     $this->map = new MigrateSQLMap($this->machineName,
         array(
           'pgid' => array('type' => 'int',
-                          'unsigned' => TRUE,
-                          'not null' => TRUE,
-                         )
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+          )
         ),
         MigrateDestinationNode::getKeySchema()
       );
@@ -245,16 +256,83 @@ INSERT INTO users (uid, name, mail, status)
 					  <h2>Manual / Cut and Paste</h2>
 					  <ul>
 					    <li class="fragment">Easiest for non-developers</li>
-					    <li class="fragment">Totally familiar forms</li>
+					    <li class="fragment">Familiar forms</li>
 					    <li class="fragment">Clean up data as you go</li>
 					    <li class="fragment">Tedious</li>
 					    <li class="fragment">Potential for missed or incorrect data</li>
 					  </ul>
           </section>
 				</section>
+        <section>
+				  <h2>Services / Services Module</h2>
+          <p>This isn't a common scenario. But you could add code to the legacy system to have it post its data to Drupal. While this may be common for creating an API, it would leave the onus of ensuring data integrity on the legacy system which is not ideal.</p>
+        </section>
+        <section>
+				  <h3>In Practice</h3>
+          <h4>A combination of techniques is likely to be used.<h4>
+          <h3 class="fragment"><br />Some Pointers</h3>
+           <ul>
+					    <li class="fragment">Clean up the source data (if possible)</li>
+					    <li class="fragment">Identify (and count) outliers</li>
+					    <li class="fragment">Log bad/failed records</li>
+					    <li class="fragment">Look at the legacy presentation</li>
+					    <li class="fragment">Test thouroughly and spot check data</li>
+					  </ul>
+        </section>
+        <section>
+          <section data-transition="linear">
+  				  <h2>Case Studies</h2>
+          </section>
+          <section data-transition="linear">
+            <h3>DoSomething.org</h3>
+            <ul>
+				      <li>Millions of records</li>
+				      <li>Zero-downtime</li>
+				      <li>Continuously updated records</li>
+					  </ul>
+          </section>
+          <section data-transition="linear">
+            <h3>National Audubon Society</h3>
+            <ul>
+				      <li>Remote database</li>
+				      <li>Hundreds of complex records</li>
+				      <li>Images, audio, related slideshows, related species</li>
+				      <li>Multiple, complex taxonomies</li>
+ 				      <li>Deployed to existing live site</li>
+					  </ul>
+          </section>
+          <section data-transition="linear">
+            <h3>Jefferson College of Health Sciences</h3>
+            <ul>
+				      <li>Boutique Legacy Database</li>
+ 				      <li>Cross linked pages</li>
+				      <li>Dozens of image galleries with custom order</li>
+				      <li>Thousands of records</li>
+				      <li>Some data as CSV</li>
+				      <li>Images and files pulled over the wire</li>
+					  </ul>
+          </section>
+        </section>
+        <section>
+          <h2>Questions?</h2>
+        </section>
+        <section>
+				  <h2>Thanks!</h2>
+          <h4><br />Resources & Credits</h4>
+           <ul>
+					    <li>This presentation <br /><small><a href="https://github.com/lliss/drupal-migration-presentation">https://github.com/lliss/drupal-migration-presentation</a></small></li>
+					    <li>Demo modules and code used in this presentation <br /> <small><a href="https://github.com/lliss/drupaldelphia-migration-demo">https://github.com/lliss/drupaldelphia-migration-demo</a></small></li>
+					    <li>Images Used:
+					      <ul>
+					        <li>Raven Image - <a href="http://www.flickr.com/photos/aidanmorgan/">flickr/John-Morgan</a></li>
+                    <li>Sphinx Image - <a href="http://www.flickr.com/photos/42956036@N03/">flickr/Stu's Images</a></li>
+                  <li>Grass Image - <a href="http://www.flickr.com/photos/8377938@N05/">flickr/Straaf</a></li>
+					      </ul>
+					    </li>
+					  </ul>
+        </section>
 			</div>
 		</div>
-
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 
