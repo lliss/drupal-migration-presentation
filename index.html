@@ -88,7 +88,7 @@
 				<section>
 					<h2>Estimates</h2>
 					<p class="fragment">Never estimate a data migration without first seeing the source data.</p>
-					<p class="fragment">Migrations are complex work, highly variable, and problem prone.</p>
+					<p class="fragment">Migrations are complex work with source and destination data that may be changing along with fluctuating client requests.</p>
 				</section>
 				
 				<section>
@@ -105,7 +105,7 @@
 			  <section>
 					<section data-transition="linear">
     				<h2>Feeds Module</h2>	  
-            <p>Feeds Module provides a user interface and fairly easy to decipher settings for scraping data from RSS feed, CSV files, XML data, and several other formats.</p>
+            <p>Feeds Module provides fairly easy to decipher settings for scraping data from RSS feeds, CSV files, XML data, and several other formats.</p>
 					</section>
 					<section data-transition="linear">
 					  <h2>Feeds Module</h2>
@@ -137,7 +137,7 @@
               <li class="fragment">Provides nothing by default <br />(rollbacks, updates, useful drush commands)</li>
               <li class="fragment">Connect to any source* <br /><small>providing you can write the code</small></li>   
               <li class="fragment">Must know Drupal's APIs (or learn them)</li>   
-              <li class="fragment">As complexity grows Migrate Module looks better</li>   
+              <li class="fragment">As complexity grows Migrate Module looks better*</li>   
 					  </ul>
 				  </section>
 				  <section data-transition="linear">
@@ -181,20 +181,17 @@ user_save($user);
 				<section>
 				  <section data-transition="linear">
 					  <h2>Migrate Module</h2>
-            <p>The go-to tool for serious migrations that have complex relationships and Drupal content types that have complex fields.</p>
+            <p>The go-to tool for serious migrations.</p>
 					</section>
 				  <section data-transition="linear">
 				    <h2>Migrate Module</h2>
 				    <ul>
-				      <li class="fragment">Abstract system with connectors to many data sources</li>
-				      <li class="fragment">CSV, XML, JSON, list data, HTML</li>
-				      <li class="fragment">Database support includes Oracle, MSSQL</li>
+				      <li class="fragment">Abstract system with connectors to many data sources and destinations <br />(node, comment, file, taxonomy, user)</li>
+				      <li class="fragment">CSV, XML, JSON, list data, HTML, Oracle, MSSQL, MySQL, Postgres</li>
 				      <li class="fragment">Dependencies and referenced data</li>
-				      <li class="fragment">Abstract support for Drupal systems <br />(node, comment, file, taxonomy, user)</li>
 				      <li class="fragment">Extensible for new sources and destinations</li>
-				      <li class="fragment">Drush and interface tools (rollback, update, reset)</li>
-				      <li class="fragment">Complex</li>
-				      <li class="fragment">Debugging challenges</li>
+				      <li class="fragment">Drush and GUI tools (rollback, update, reset)</li>
+				      <li class="fragment">Complex - Debugging challenges</li>
 				      <li class="fragment">Yet another API to learn/work with</li>
 				    </ul>
 			    </section>
@@ -293,6 +290,7 @@ INSERT INTO users (uid, name, mail, status)
 					    <li class="fragment">Log bad/failed records</li>
 					    <li class="fragment">Look at the legacy presentation</li>
 					    <li class="fragment">Test thoroughly and spot check data</li>
+					    <li class="fragment">Consider investing in automated testing</li>					    
 					  </ul>
         </section>
         <section>
@@ -341,7 +339,7 @@ INSERT INTO users (uid, name, mail, status)
 					    <li>Images Used:
 					      <ul>
 					        <li>Raven Image - <a href="http://www.flickr.com/photos/aidanmorgan/">flickr/John-Morgan</a></li>
-                    <li>Sphinx Image - <a href="http://www.flickr.com/photos/42956036@N03/">flickr/Stu's Images</a></li>
+                  <li>Sphinx Image - <a href="http://www.flickr.com/photos/42956036@N03/">flickr/Stu's Images</a></li>
                   <li>Grass Image - <a href="http://www.flickr.com/photos/8377938@N05/">flickr/Straaf</a></li>
 					      </ul>
 					    </li>
